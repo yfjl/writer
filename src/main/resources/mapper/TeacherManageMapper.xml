@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+
+<mapper  namespace="com.winterchen.dao.TeacherManageDao">
+    <select id="select7" resultType="com.winterchen.model.dto.TeacherManageDto">
+        select wr.nickName,wr.team,wr.role,num,wr.`nickName` as supName,wr.teacher_email as teacherEmail, wr.balance,amount,wr.openid  from w_role wr
+        left join (select fpopenid,count(fpopenid) as num from w_order_info  GROUP BY fpopenid) c on  c.fpopenid = wr.openid
+        left join w_role wl on wl.team = wr.team and wl.role = 4
+        left join (select openid,sum(amount) as amount from w_withdraw where role = '3' and status = 1 ) z on z.openid = wr.openid
+        where  wr.role = 3
+        <if test="nickName != null and nickName != ''">
+            AND  wr.nickName = #{nickName}
+        </if>
+    </select>
+</mapper>
+
+
+
+
+
+

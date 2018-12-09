@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+
+<mapper  namespace="com.winterchen.dao.DLManageDao">
+    <select id="select7" resultType="com.winterchen.model.dto.DLManageDto">
+        select wr.nickName,wr.integral,wr.level,wr.openid,integrals,num from w_role wr
+        left join (select openid,count(openid) as num from w_order_info  GROUP BY openid) c on  c.openid = wr.openid
+        left join (select openid,sum(integral) as integrals from w_integral_record ) z on z.openid = wr.openid
+        where wr.role = 2
+        <if test="nickName != null and nickName != ''">
+            AND  wr.nickName = #{nickName}
+        </if>
+    </select>
+</mapper>
+
+
+
+

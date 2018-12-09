@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+
+<mapper namespace="com.winterchen.dao.IntegralRecordDao">
+
+
+    <insert id="insert" parameterType="com.winterchen.model.IntegralRecordDomain">
+        insert into w_integral_record (id,type,integral,openid,create_time) values (#{id},#{type},#{integral},#{openid},#{createTime})
+    </insert>
+
+    <select id="select7" resultType="com.winterchen.model.IntegralRecordDomain">
+        select * from w_integral_record where openid = #{openid}
+    </select>
+
+
+
+
+</mapper>
